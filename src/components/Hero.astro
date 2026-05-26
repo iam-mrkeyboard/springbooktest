@@ -1,0 +1,70 @@
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <span class="hero-subtitle">Welcome to SpringBokExpeditions</span>
+    <h1 class="hero-title">Experience the Wild Like Never Before</h1>
+    <p class="hero-text">
+      Immerse yourself in breathtaking landscapes, encounter majestic wildlife up close, and embark on extraordinary adventures curated for the true explorer. With expert guides and sustainable travel, every journey with Springbok Expeditions promises unforgettable moments in the heart of nature.
+    </p>
+    <div class="hero-buttons">
+      <a href="#safaris" class="btn btn-primary">Safari</a>
+      <a href="#destinations" class="btn btn-outline">Destinations</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url('https://springbokexpeditions.com/wp-content/uploads/2025/02/wildebeest-and-zebras-at-the-serengeti-national-park-tanzania-africa.jpg') center/cover no-repeat;
+    text-align: center;
+    padding-top: 80px;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    color: #fff;
+  }
+  .hero-subtitle {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+  }
+  .hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+  }
+  .hero-text {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    opacity: 0.95;
+  }
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  @media (max-width: 768px) {
+    .hero-title { font-size: 2.25rem; }
+    .hero-text { font-size: 1rem; }
+  }
+</style>
