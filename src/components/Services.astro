@@ -1,0 +1,105 @@
+---
+const services = [
+  {
+    icon: 'https://springbokexpeditions.com/wp-content/uploads/2025/02/1_Map.png',
+    title: 'Wildlife Safaris',
+    text: 'Explore Tanzania\'s iconic parks, from the Serengeti to Ngorongoro Crater, and witness the Big Five in their natural habitat.',
+  },
+  {
+    icon: 'https://springbokexpeditions.com/wp-content/uploads/2025/02/39_Camping.png',
+    title: 'Mountain Trekking',
+    text: 'Conquer Africa\'s highest peaks! Take on the challenge of Mt. Kilimanjaro.',
+  },
+  {
+    icon: 'https://springbokexpeditions.com/wp-content/uploads/2025/02/38_Compass.png',
+    title: 'Cultural Experiences',
+    text: 'Connect with Tanzania\'s rich heritage—walk with the Maasai, visit local villages, and experience traditional customs.',
+  },
+  {
+    icon: 'https://springbokexpeditions.com/wp-content/uploads/2025/02/33_Backpack.png',
+    title: 'Custom Adventures',
+    text: 'Design your perfect trip! Whether it\'s luxury safaris, off-the-beaten-path excursions, or a mix of wildlife and culture.',
+  },
+];
+---
+<section class="services section-padding" id="safaris">
+  <div class="container">
+    <div class="services-grid">
+      {services.map(service => (
+        <div class="service-card">
+          <div class="service-icon">
+            <img src={service.icon} alt={service.title} width="80" height="80" loading="lazy">
+          </div>
+          <h3 class="service-title">{service.title}</h3>
+          <p class="service-text">{service.text}</p>
+          <a href="#" class="service-link">Learn more</a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services { background: var(--color-bg-alt); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+  }
+  .service-card {
+    background: #fff;
+    padding: 2.5rem 2rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  }
+  .service-icon {
+    margin-bottom: 1.5rem;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .service-icon img { max-height: 100%; width: auto; margin: 0 auto; }
+  .service-title {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin-bottom: 0.75rem;
+  }
+  .service-text {
+    font-size: 0.9375rem;
+    color: var(--color-text-light);
+    margin-bottom: 1.25rem;
+    line-height: 1.7;
+  }
+  .service-link {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-accent);
+    position: relative;
+  }
+  .service-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s;
+  }
+  .service-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+</style>
