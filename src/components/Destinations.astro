@@ -1,0 +1,132 @@
+---
+const destinations = [
+  {
+    title: 'Serengeti National Park',
+    text: 'Home to the Great Migration and abundant wildlife.',
+    image: 'https://springbokexpeditions.com/wp-content/uploads/elementor/thumbs/male-and-female-lions-eating-zebras-in-serengeti-national-park-r1eqcx411cn0qqlx9ah2lyglq5aeqdmgvvnygulpkc.jpg',
+    link: '#',
+  },
+  {
+    title: 'Ngorongoro Crater',
+    text: 'A natural wonder filled with diverse wildlife.',
+    image: 'https://springbokexpeditions.com/wp-content/uploads/elementor/thumbs/grey-crowned-crane-in-flight-in-ngorongoro-crater-r1eqeo37r918cm2g1jp2r0khiyo023khgjdhme0bzg.jpg',
+    link: '#',
+  },
+  {
+    title: 'Tarangire National Park',
+    text: 'Famous for its elephant herds and baobab trees.',
+    image: 'https://springbokexpeditions.com/wp-content/uploads/elementor/thumbs/elephant-loxodonta-africana-tarangire-national-park-tanzania-r1eqffcj9g2jpayumdh99bour4xn9bkp8aakjevwz0.jpg',
+    link: '#',
+  },
+  {
+    title: 'Lake Manyara National Park',
+    text: 'Renowned for tree-climbing lions and flamingos.',
+    image: 'https://springbokexpeditions.com/wp-content/uploads/elementor/thumbs/flock-of-pink-flamingos-from-lake-manyara-tanzania-r1eqknc98b7w7bds4mqn4091k7720sb0m4roir56ek.jpg',
+    link: '#',
+  },
+  {
+    title: 'Kilimanjaro',
+    text: 'Mount Kilimanjaro is the highest mountain in Africa.',
+    image: 'https://springbokexpeditions.com/wp-content/uploads/elementor/thumbs/hikers-climbing-mount-kilimanjaro-in-tanzania-r1eqnyprc9rb5skdrkc9eo4l04uo6cgxejmcgw86gc.jpg',
+    link: '#',
+  },
+  {
+    title: 'Zanzibar',
+    text: 'Zanzibar is a Tanzanian archipelago off the coast of East Africa.',
+    image: 'https://springbokexpeditions.com/wp-content/uploads/elementor/thumbs/view-of-the-tropical-island-of-zanzibar-featuring-a-serene-bay-r1ep2ba462u72sb2en80h7utdd082nllh768txpg30.jpg',
+    link: '#',
+  },
+];
+---
+<section class="destinations section-padding" id="destinations">
+  <div class="container">
+    <span class="section-subtitle">SpringBokexpeditions</span>
+    <h2 class="section-title">Destination</h2>
+    <div class="destinations-grid">
+      {destinations.map(dest => (
+        <a href={dest.link} class="dest-card">
+          <div class="dest-image">
+            <img src={dest.image} alt={dest.title} loading="lazy">
+            <div class="dest-overlay">
+              <span class="dest-btn">Explore Now</span>
+            </div>
+          </div>
+          <div class="dest-body">
+            <h3>{dest.title}</h3>
+            <p>{dest.text}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+    <div class="destinations-cta">
+      <a href="#" class="btn btn-primary">Explore Destination</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .destinations { background: var(--color-bg-alt); }
+  .destinations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .dest-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .dest-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  }
+  .dest-image {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+  }
+  .dest-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+  .dest-card:hover .dest-image img { transform: scale(1.08); }
+  .dest-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .dest-card:hover .dest-overlay { opacity: 1; }
+  .dest-btn {
+    background: var(--color-accent);
+    color: #fff;
+    padding: 0.6rem 1.5rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 4px;
+  }
+  .dest-body { padding: 1.5rem; }
+  .dest-body h3 {
+    font-size: 1.1rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+  }
+  .dest-body p {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    line-height: 1.6;
+  }
+  .destinations-cta { text-align: center; margin-top: 3rem; }
+</style>
