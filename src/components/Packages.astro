@@ -1,0 +1,133 @@
+---
+const packages = [
+  {
+    title: 'Serengeti & Ngorongoro Safari',
+    text: 'Witness the Big Five & the Great Migration.',
+    image: 'https://springbokexpeditions.com/wp-content/uploads/elementor/thumbs/zebras-in-ngorongoro-r1ersayenazbfbyx7i2uwznqsg0ripm7y7jixeexf0.jpg',
+    location: 'Tanzania',
+    duration: '10 Days',
+  },
+  {
+    title: 'Tarangire & Lake Manyara Safari',
+    text: 'Elephants, tree-climbing lions, and flamingos.',
+    image: 'https://springbokexpeditions.com/wp-content/uploads/elementor/thumbs/impala-grazing-peacefully-in-the-african-savanna-r1erzvjlp9cgy8yyzrwo02vf26p7ixodnoqc3n6rak.jpg',
+    location: 'Tanzania',
+    duration: '10 Days',
+  },
+  {
+    title: 'Custom Luxury Safaris',
+    text: 'Indulge in a luxurious safari experience designed just for you.',
+    image: 'https://springbokexpeditions.com/wp-content/uploads/elementor/thumbs/giraffe-on-safari-in-africa-r1es2vn1j7gg1elygkmrgtlfdhwf44liejr6agqhf0.jpg',
+    location: 'Tanzania',
+    duration: '10 Days',
+  },
+  {
+    title: 'Mt. Kilimanjaro Climb',
+    text: 'Marangu, Machame, Lemosho routes.',
+    image: 'https://springbokexpeditions.com/wp-content/uploads/elementor/thumbs/hikers-climbing-mount-kilimanjaro-in-tanzania-r1eqnyprc9rb5skdrkc9eo4l04uo6cgxejmcgw86gc.jpg',
+    location: 'Tanzania',
+    duration: '7 Days',
+  },
+  {
+    title: 'Mt. Meru Trekking',
+    text: 'A scenic and less crowded alternative.',
+    image: 'https://springbokexpeditions.com/wp-content/uploads/elementor/thumbs/lanskape_meru-r1esmwl954vdebiqiq9m39nz016y3z3mto4ldp1iuk.jpg',
+    location: 'Tanzania',
+    duration: '5 Days',
+  },
+  {
+    title: 'Zanzibar – The Jewel of the Indian Ocean',
+    text: 'A scenic views and exploration of zenji.',
+    image: 'https://springbokexpeditions.com/wp-content/uploads/elementor/thumbs/travel-r1zevt8137s08twv6zl1yc9pkx8v2b8wlvllptorl8.jpg',
+    location: 'Tanzania',
+    duration: '5 Days',
+  },
+];
+---
+<section class="packages section-padding" id="zanzibar">
+  <div class="container">
+    <span class="section-subtitle">SpringBokexpeditions</span>
+    <h2 class="section-title">Safari & Tour Packages</h2>
+    <div class="packages-grid">
+      {packages.map(pkg => (
+        <div class="package-card">
+          <div class="package-image">
+            <img src={pkg.image} alt={pkg.title} loading="lazy">
+          </div>
+          <div class="package-body">
+            <h3>{pkg.title}</h3>
+            <p>{pkg.text}</p>
+            <div class="package-meta">
+              <span>{pkg.location}</span>
+              <span>{pkg.duration}</span>
+            </div>
+            <a href="#" class="package-link">Explore Now</a>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="packages-cta">
+      <a href="#" class="btn btn-primary">Explore Safari Tour Packages</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .packages { background: #fff; }
+  .packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .package-card {
+    background: var(--color-bg-alt);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    transition: transform 0.3s;
+  }
+  .package-card:hover { transform: translateY(-5px); }
+  .package-image { height: 220px; overflow: hidden; }
+  .package-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+  .package-card:hover .package-image img { transform: scale(1.08); }
+  .package-body { padding: 1.5rem; }
+  .package-body h3 {
+    font-size: 1.1rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+  }
+  .package-body p {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  .package-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+  }
+  .package-meta span {
+    background: #fff;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+  }
+  .package-link {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+  .packages-cta { text-align: center; margin-top: 3rem; }
+</style>
