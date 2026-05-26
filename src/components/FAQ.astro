@@ -1,0 +1,111 @@
+---
+const faqs = [
+  {
+    q: 'What destinations do you offer in Tanzania?',
+    a: 'We provide customized and package tours across Tanzania, including: Wildlife Safaris – Serengeti, Ngorongoro, Tarangire, and more. Mountain Treks – Mt. Kilimanjaro, Mt. Meru. Beach Getaways – Zanzibar, Mafia, and Pemba Islands. Cultural Tours – Visit Maasai villages and local communities.',
+  },
+  {
+    q: 'Do you offer customized safari packages?',
+    a: 'Yes! We specialize in tailor-made itineraries based on your preferences, budget, and travel style. Whether you want a luxury safari, budget-friendly adventure, or a mix of experiences, we can create the perfect trip for you.',
+  },
+  {
+    q: 'When is the best time to visit Tanzania?',
+    a: 'Tanzania is a year-round destination. Wildebeest Migration – June to October (best in Serengeti). Dry Season (Best for Wildlife Viewing) – June to October. Green Season (Lush Landscapes, Fewer Crowds) – November to May. Climbing Kilimanjaro – January to March & June to October.',
+  },
+  {
+    q: 'What should I pack for my safari or trek?',
+    a: 'For safaris: Light, neutral-colored clothing, comfortable shoes, a hat, sunglasses, and a camera. For trekking: Layered clothing, good hiking boots, gloves, and a headlamp. For Zanzibar: Light summer wear, swimwear, and sunscreen.',
+  },
+  {
+    q: 'Do you provide airport transfers?',
+    a: 'Yes! We offer airport pick-ups and drop-offs from major airports, including Kilimanjaro International Airport (JRO) and Zanzibar International Airport.',
+  },
+  {
+    q: 'Is Tanzania safe for travelers?',
+    a: 'Absolutely! Tanzania is a safe and welcoming country for tourists. We ensure secure transport, guided tours, and experienced local guides for your safety and comfort.',
+  },
+  {
+    q: 'Do I need a visa to visit Tanzania?',
+    a: 'Most travelers need a visa, which can be obtained online (eVisa) or on arrival. Check your country\'s visa requirements before traveling.',
+  },
+  {
+    q: 'What payment methods do you accept?',
+    a: 'We accept payments via bank transfer, credit/debit cards, and mobile payment platforms. A deposit is required to confirm bookings.',
+  },
+  {
+    q: 'Can I combine a safari with a Zanzibar beach holiday?',
+    a: 'Yes! Many travelers end their safari with a relaxing stay in Zanzibar. We offer seamless safari-to-beach package options.',
+  },
+  {
+    q: 'How do I book a tour with SpringBok Expeditions?',
+    a: 'It\'s easy! Contact us via our website, email, or WhatsApp, and we\'ll help you plan your dream adventure.',
+  },
+];
+---
+<section class="faq section-padding" id="faq">
+  <div class="container">
+    <span class="section-subtitle">FAQ</span>
+    <h2 class="section-title">Frequently Ask Questions</h2>
+    <p class="faq-intro"><strong>SpringBok Expeditions</strong> to help potential travelers with common questions.</p>
+    <div class="faq-list">
+      {faqs.map((faq, i) => (
+        <details class="faq-item">
+          <summary>{faq.q}</summary>
+          <div class="faq-answer"><p>{faq.a}</p></div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq { background: var(--color-bg-alt); }
+  .faq-intro {
+    text-align: center;
+    color: var(--color-text-light);
+    margin-bottom: 2rem;
+    font-size: 1rem;
+  }
+  .faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .faq-item {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    overflow: hidden;
+  }
+  .faq-item summary {
+    padding: 1.25rem 1.5rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-primary);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+  .faq-item summary:hover { background: #f5f5f5; }
+  .faq-item summary::after {
+    content: '+';
+    font-size: 1.5rem;
+    color: var(--color-accent);
+    font-weight: 400;
+    transition: transform 0.3s;
+  }
+  .faq-item[open] summary::after { content: '−'; }
+  .faq-answer {
+    padding: 0 1.5rem 1.25rem;
+    color: var(--color-text-light);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+  }
+  .faq-answer p { margin-bottom: 0.5rem; }
+</style>
