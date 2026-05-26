@@ -7,19 +7,79 @@
 
 ---
 
-## Quick Start (3 commands after MySQL setup)
+## Quick Start
 
 ```bash
-# 1. Install deps
-npm install --legacy-peer-deps
-
-# 2. Import database schema (replace with your cPanel credentials)
+# 1. Import database schema
 mysql -u CPANEL_USER -p -h localhost CPANEL_DB_NAME < database/init-mysql.sql
+
+# 2. Install deps (see npm fix below)
+npm install --legacy-peer-deps
 
 # 3. Build & start
 npm run build
 node dist/server/entry.mjs
 ```
+
+---
+
+## ⚠️ npm Install Error Fix
+
+### The Problem
+
+cPanel's Node.js App Manager runs `npm install` without arguments, which fails with:
+
+```
+npm error ERESOLVE unable to resolve dependency tree
+npm error peer @effect/platform@"^0.79.4" from @effect/rpc-http@0.52.4
+npm error Found: @effect/platform@0.96.1
+```
+
+This happens because StudioCMS depends on the **Effect** ecosystem, and different packages require conflicting versions of `@effect/platform`.
+
+### Fix Option 1: cPanel GUI (Recommended)
+
+1. cPanel → **Setup Node.js App** → Edit your app
+2. In the **Environment Variables** section, add:
+
+   | Variable | Value |
+   |----------|-------|
+   | `NPM_CONFIG_LEGACY_PEER_DEPS` | `true` |
+
+3. Click **Run NPM Install** — this tells npm to use `--legacy-peer-deps` automatically
+
+### Fix Option 2: cPanel SSH Terminal
+
+cPanel locks `node` and `npm` inside its Node.js Selector paths. They're not globally available. Find and use them:
+
+```bash
+# Locate the Node.js binary (replace 24 with your version)
+ls /opt/alt/alt-nodejs24/root/usr/bin/node
+
+# Add to PATH and install
+export PATH=/opt/alt/alt-nodejs24/root/usr/bin:$PATH
+npm install --legacy-peer-deps
+```
+
+Then go to Node.js App Manager and **Start App**.
+
+### Fix Option 3: Pre-install locally
+
+Build `node_modules/` locally and include it in the ZIP upload:
+
+```bash
+npm install --legacy-peer-deps
+zip -r deploy.zip . -x ".env" "*.db" ".astro/*" "dist/*" "src/*"
+```
+
+Upload the ZIP to cPanel, extract it, then run `npm run build` on cPanel.
+
+### Why `--legacy-peer-deps` is safe here
+
+This flag tells npm to ignore strict peer dependency version matching and use whatever's installed. For StudioCMS:
+- All Effect packages are compatible despite version mismatch warnings
+- The app runs correctly in production as verified on `test.springbokexpeditions.com`
+- The alternative (`--force`) may install broken combinations
 
 ---
 
