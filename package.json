@@ -27,6 +27,7 @@
     "@libsql/client": "^0.17.3",
     "@studiocms/html": "^0.3.0",
     "@studiocms/md": "^0.3.0",
+    "@studiocms/s3-storage": "^0.3.1",
     "astro": "^5.0.0",
     "effect": "^3.21.2",
     "kysely-turso": "^0.1.1",
