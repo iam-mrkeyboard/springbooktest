@@ -1,27 +1,37 @@
-<footer class="site-footer" id="contact">
-  <div class="container">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <a href="#" class="footer-logo">
-          <img src="https://springbokexpeditions.com/wp-content/uploads/2025/02/RT-02-01.png" alt="SpringbokExpeditions" width="160" loading="lazy">
-        </a>
-      </div>
-      <nav class="footer-nav">
-        <a href="#about">About Us</a>
-        <a href="#destinations">Destination</a>
-        <a href="#safaris">Safaris</a>
-        <a href="#contact">Contact Us</a>
-      </nav>
-      <div class="footer-social">
-        <a href="https://www.facebook.com/people/SpringBok-Expeditions/61574143054684/" aria-label="Facebook" target="_blank" rel="noopener">Facebook</a>
-        <a href="https://wa.link/ppr59p" aria-label="WhatsApp" target="_blank" rel="noopener">WhatsApp</a>
-        <a href="https://www.instagram.com/spring_bokexpeditions/" aria-label="Instagram" target="_blank" rel="noopener">Instagram</a>
-      </div>
+---
+import { getPage } from '../lib/sdk-client';
+
+const footerPage = await getPage('footer');
+
+// Fallback footer content
+const fallbackContent = `
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="footer-logo">
+        <img src="https://springbokexpeditions.com/wp-content/uploads/2025/02/RT-02-01.png" alt="SpringbokExpeditions" width="160" loading="lazy">
+      </a>
     </div>
-    <div class="footer-bottom">
-      <p>Copyright © 2025 SpringBokexpeditions. All rights reserved • Developed by Ab113Tech</p>
+    <nav class="footer-nav">
+      <a href="#about">About Us</a>
+      <a href="#destinations">Destination</a>
+      <a href="#safaris">Safaris</a>
+      <a href="#contact">Contact Us</a>
+    </nav>
+    <div class="footer-social">
+      <a href="https://www.facebook.com/people/SpringBok-Expeditions/61574143054684/" aria-label="Facebook" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://wa.link/ppr59p" aria-label="WhatsApp" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="https://www.instagram.com/spring_bokexpeditions/" aria-label="Instagram" target="_blank" rel="noopener">Instagram</a>
     </div>
   </div>
+  <div class="footer-bottom">
+    <p>Copyright © 2025 SpringBokexpeditions. All rights reserved • Developed by Ab113Tech</p>
+  </div>
+`;
+
+const footerContent = footerPage?.defaultContent || fallbackContent;
+---
+<footer class="site-footer" id="contact">
+  <div class="container" set:html={footerContent}></div>
 </footer>
 
 <style>
