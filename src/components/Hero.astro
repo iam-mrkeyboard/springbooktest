@@ -1,15 +1,28 @@
-<section class="hero">
+---
+import { getPage } from '../lib/sdk-client';
+
+const heroPage = await getPage('home-hero');
+
+// Fallback values if page doesn't exist
+const fallback = {
+  title: 'Experience the Wild Like Never Before',
+  description: 'Immerse yourself in breathtaking landscapes, encounter majestic wildlife up close, and embark on extraordinary adventures curated for the true explorer. With expert guides and sustainable travel, every journey with Springbok Expeditions promises unforgettable moments in the heart of nature.',
+  heroImage: 'https://springbokexpeditions.com/wp-content/uploads/2025/02/wildebeest-and-zebras-at-the-serengeti-national-park-tanzania-africa.jpg',
+  subtitle: 'Welcome to SpringBokExpeditions'
+};
+
+const data = heroPage ?? fallback;
+---
+
+<section class="hero" style={`background-image: url('${data.heroImage || fallback.heroImage}')`}>
   <div class="hero-overlay"></div>
   <div class="container hero-content">
-    <span class="hero-subtitle">Welcome to SpringBokExpeditions</span>
-    <h1 class="hero-title">Experience the Wild Like Never Before</h1>
+    <span class="hero-subtitle">{data.subtitle || fallback.subtitle}</span>
+    <h1 class="hero-title">{data.title || fallback.title}</h1>
     <p class="hero-text">
-      Immerse yourself in breathtaking landscapes, encounter majestic wildlife up close, and embark on extraordinary adventures curated for the true explorer. With expert guides and sustainable travel, every journey with Springbok Expeditions promises unforgettable moments in the heart of nature.
+      {data.description || fallback.description}
     </p>
-    <div class="hero-buttons">
-      <a href="#safaris" class="btn btn-primary">Safari</a>
-      <a href="#destinations" class="btn btn-outline">Destinations</a>
-    </div>
+    <div class="hero-buttons" set:html={data.defaultContent || ''}></div>
   </div>
 </section>
 
