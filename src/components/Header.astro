@@ -1,5 +1,10 @@
 ---
-const navLinks = [
+import { getPage } from '../lib/sdk-client';
+
+const headerPage = await getPage('header');
+
+// Fallback navigation links
+const fallbackNavLinks = [
   { name: 'Home', href: '#' },
   { name: 'Safaris', href: '#safaris' },
   { name: 'Destinations', href: '#destinations' },
@@ -7,6 +12,26 @@ const navLinks = [
   { name: 'About', href: '#about' },
   { name: 'Contact', href: '#contact' },
 ];
+
+// Parse navigation links from defaultContent (JSON format)
+function parseNavLinks(content: string | null): Array<{ name: string; href: string }> {
+  if (!content) return fallbackNavLinks;
+  
+  try {
+    // Try to parse as JSON array
+    const parsed = JSON.parse(content);
+    if (Array.isArray(parsed) && parsed.length > 0) {
+      return parsed;
+    }
+  } catch (e) {
+    // If parsing fails, use fallback
+    console.warn('Failed to parse header navigation links, using fallback');
+  }
+  
+  return fallbackNavLinks;
+}
+
+const navLinks = parseNavLinks(headerPage?.defaultContent || null);
 ---
 <header class="site-header">
   <div class="container header-inner">
