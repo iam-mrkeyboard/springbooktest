@@ -1,5 +1,10 @@
 ---
-const destinations = [
+import { getFolderPages } from '../lib/sdk-client';
+
+const destinationPages = await getFolderPages('home-destinations');
+
+// Fallback values if folder doesn't exist or is empty
+const fallback = [
   {
     title: 'Serengeti National Park',
     text: 'Home to the Great Migration and abundant wildlife.',
@@ -37,6 +42,13 @@ const destinations = [
     link: '#',
   },
 ];
+
+const destinations = destinationPages.length > 0 ? destinationPages.map(page => ({
+  title: page.title,
+  text: page.description,
+  image: page.heroImage || fallback[0].image,
+  link: page.slug ? `/${page.slug}` : '#',
+})) : fallback;
 ---
 <section class="destinations section-padding" id="destinations">
   <div class="container">
