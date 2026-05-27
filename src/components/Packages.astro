@@ -1,5 +1,10 @@
 ---
-const packages = [
+import { getFolderPages } from '../lib/sdk-client';
+
+const packagePages = await getFolderPages('home-packages');
+
+// Fallback values if folder doesn't exist or is empty
+const fallback = [
   {
     title: 'Serengeti & Ngorongoro Safari',
     text: 'Witness the Big Five & the Great Migration.',
@@ -43,6 +48,30 @@ const packages = [
     duration: '5 Days',
   },
 ];
+
+// Parse location and duration from defaultContent (format: "Location: X | Duration: Y")
+function parseMetadata(content: string | null): { location: string; duration: string } {
+  if (!content) return { location: 'Tanzania', duration: '5 Days' };
+  
+  const locationMatch = content.match(/Location:\s*([^|]+)/i);
+  const durationMatch = content.match(/Duration:\s*([^|<]+)/i);
+  
+  return {
+    location: locationMatch ? locationMatch[1].trim() : 'Tanzania',
+    duration: durationMatch ? durationMatch[1].trim() : '5 Days',
+  };
+}
+
+const packages = packagePages.length > 0 ? packagePages.map(page => {
+  const meta = parseMetadata(page.defaultContent);
+  return {
+    title: page.title,
+    text: page.description,
+    image: page.heroImage || fallback[0].image,
+    location: meta.location,
+    duration: meta.duration,
+  };
+}) : fallback;
 ---
 <section class="packages section-padding" id="zanzibar">
   <div class="container">
