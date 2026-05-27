@@ -1,5 +1,10 @@
 ---
-const faqs = [
+import { getPage } from '../lib/sdk-client';
+
+const faqPage = await getPage('home-faq');
+
+// Fallback values if page doesn't exist
+const fallback = [
   {
     q: 'What destinations do you offer in Tanzania?',
     a: 'We provide customized and package tours across Tanzania, including: Wildlife Safaris – Serengeti, Ngorongoro, Tarangire, and more. Mountain Treks – Mt. Kilimanjaro, Mt. Meru. Beach Getaways – Zanzibar, Mafia, and Pemba Islands. Cultural Tours – Visit Maasai villages and local communities.',
@@ -41,20 +46,28 @@ const faqs = [
     a: 'It\'s easy! Contact us via our website, email, or WhatsApp, and we\'ll help you plan your dream adventure.',
   },
 ];
+
+// If page exists, use its defaultContent as full HTML
+// Otherwise, use fallback array
+const useDynamicContent = faqPage && faqPage.defaultContent;
 ---
 <section class="faq section-padding" id="faq">
   <div class="container">
     <span class="section-subtitle">FAQ</span>
     <h2 class="section-title">Frequently Ask Questions</h2>
     <p class="faq-intro"><strong>SpringBok Expeditions</strong> to help potential travelers with common questions.</p>
-    <div class="faq-list">
-      {faqs.map((faq, i) => (
-        <details class="faq-item">
-          <summary>{faq.q}</summary>
-          <div class="faq-answer"><p>{faq.a}</p></div>
-        </details>
-      ))}
-    </div>
+    {useDynamicContent ? (
+      <div class="faq-list" set:html={faqPage.defaultContent}></div>
+    ) : (
+      <div class="faq-list">
+        {fallback.map((faq, i) => (
+          <details class="faq-item">
+            <summary>{faq.q}</summary>
+            <div class="faq-answer"><p>{faq.a}</p></div>
+          </details>
+        ))}
+      </div>
+    )}
   </div>
 </section>
 
