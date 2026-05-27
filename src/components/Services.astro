@@ -1,5 +1,10 @@
 ---
-const services = [
+import { getFolderPages } from '../lib/sdk-client';
+
+const servicePages = await getFolderPages('home-services');
+
+// Fallback values if folder doesn't exist or is empty
+const fallback = [
   {
     icon: 'https://springbokexpeditions.com/wp-content/uploads/2025/02/1_Map.png',
     title: 'Wildlife Safaris',
@@ -21,6 +26,12 @@ const services = [
     text: 'Design your perfect trip! Whether it\'s luxury safaris, off-the-beaten-path excursions, or a mix of wildlife and culture.',
   },
 ];
+
+const services = servicePages.length > 0 ? servicePages.map(page => ({
+  icon: page.heroImage || fallback[0].icon,
+  title: page.title,
+  text: page.description,
+})) : fallback;
 ---
 <section class="services section-padding" id="safaris">
   <div class="container">
