@@ -1,4 +1,4 @@
-import { SDKCore, runSDK } from 'studiocms:sdk';
+import { SDKCoreJs } from 'studiocms:sdk';
 
 // Simple in-memory cache with TTL
 const cache = new Map<string, { data: any; ts: number }>();
@@ -25,7 +25,7 @@ export async function getPage(slug: string) {
   if (cached) return cached;
 
   try {
-    const page = await runSDK(SDKCore.GET.page.bySlug(slug));
+    const page = await SDKCoreJs.GET.page.bySlug(slug);
     setCache(cacheKey, page);
     return page;
   } catch (err) {
@@ -43,7 +43,7 @@ export async function getFolderPages(folderSlug: string) {
   if (cached) return cached;
 
   try {
-    const pages = await runSDK(SDKCore.GET.folderPages(folderSlug));
+    const pages = await SDKCoreJs.GET.folderPages(folderSlug);
     setCache(cacheKey, pages);
     return pages;
   } catch (err) {
@@ -61,7 +61,7 @@ export async function getAllPages() {
   if (cached) return cached;
 
   try {
-    const pages = await runSDK(SDKCore.GET.pages());
+    const pages = await SDKCoreJs.GET.pages();
     setCache(cacheKey, pages);
     return pages;
   } catch (err) {
@@ -79,7 +79,7 @@ export async function getFolderTree() {
   if (cached) return cached;
 
   try {
-    const tree = await runSDK(SDKCore.GET.folderTree());
+    const tree = await SDKCoreJs.GET.folderTree();
     setCache(cacheKey, tree);
     return tree;
   } catch (err) {
@@ -97,7 +97,7 @@ export async function getSiteConfig() {
   if (cached) return cached;
 
   try {
-    const config = await runSDK(SDKCore.GET.siteConfig());
+    const config = await SDKCoreJs.GET.siteConfig();
     setCache(cacheKey, config);
     return config;
   } catch (err) {
