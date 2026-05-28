@@ -1,28 +1,53 @@
+---
+import { getPage } from '../lib/sdk-client';
+
+const discoverPage = await getPage('home-discover');
+
+const fallback = {
+  subtitle: 'SpringBokexpeditions',
+  title: 'Discover Tanzania with SpringBok Expeditions!',
+  description: `<p>Embark on a thrilling safari, witness the <strong>Great Migration</strong>, or trek <strong>Mt. Kilimanjaro</strong>. Immerse yourself in local culture, meet the <strong>Maasai</strong>, and experience Tanzania's breathtaking landscapes.</p>
+<p>With a focus on <strong>sustainable travel</strong>, we create unforgettable adventures while supporting local communities.</p>`,
+  tagline: 'Your journey begins here!',
+  cardImage: 'https://springbokexpeditions.com/wp-content/uploads/2025/02/wildebeest-and-zebras-at-the-serengeti-national-park-tanzania-africa.jpg',
+  cardTitle: 'The Great Migration',
+  cardDescription: 'Witness one of nature\'s greatest spectacles as over 1.5 million wildebeest, zebras, and gazelles move across the Serengeti.',
+  cardLink: '#destinations',
+  mainImage: 'https://springbokexpeditions.com/wp-content/uploads/2025/02/v-01-02.jpg',
+};
+
+const data = discoverPage ? {
+  subtitle: discoverPage.subtitle || fallback.subtitle,
+  title: discoverPage.title || fallback.title,
+  description: discoverPage.description || fallback.description,
+  tagline: discoverPage.tagline || fallback.tagline,
+  cardImage: discoverPage.heroImage || fallback.cardImage,
+  cardTitle: discoverPage.cardTitle || fallback.cardTitle,
+  cardDescription: discoverPage.cardDescription || fallback.cardDescription,
+  cardLink: discoverPage.cardLink || fallback.cardLink,
+  mainImage: discoverPage.mainImage || fallback.mainImage,
+} : fallback;
+---
 <section class="discover section-padding" id="about">
   <div class="container discover-inner">
     <div class="discover-text">
-      <span class="section-subtitle" style="text-align:left;">SpringBokexpeditions</span>
-      <h2 class="section-title" style="text-align:left;">Discover Tanzania with SpringBok Expeditions!</h2>
-      <p>
-        Embark on a thrilling safari, witness the <strong>Great Migration</strong>, or trek <strong>Mt. Kilimanjaro</strong>. Immerse yourself in local culture, meet the <strong>Maasai</strong>, and experience Tanzania's breathtaking landscapes.
-      </p>
-      <p>
-        With a focus on <strong>sustainable travel</strong>, we create unforgettable adventures while supporting local communities.
-      </p>
-      <p class="discover-tagline">Your journey begins here!</p>
+      <span class="section-subtitle" style="text-align:left;">{data.subtitle}</span>
+      <h2 class="section-title" style="text-align:left;">{data.title}</h2>
+      <div set:html={data.description}></div>
+      <p class="discover-tagline">{data.tagline}</p>
       <div class="discover-cards">
         <div class="d-card">
-          <img src="https://springbokexpeditions.com/wp-content/uploads/2025/02/wildebeest-and-zebras-at-the-serengeti-national-park-tanzania-africa.jpg" alt="The Great Migration" loading="lazy">
+          <img src={data.cardImage} alt={data.cardTitle} loading="lazy">
           <div class="d-card-body">
-            <h4>The Great Migration</h4>
-            <p>Witness one of nature's greatest spectacles as over 1.5 million wildebeest, zebras, and gazelles move across the Serengeti.</p>
-            <a href="#destinations">Discover More</a>
+            <h4>{data.cardTitle}</h4>
+            <p>{data.cardDescription}</p>
+            <a href={data.cardLink}>Discover More</a>
           </div>
         </div>
       </div>
     </div>
     <div class="discover-image">
-      <img src="https://springbokexpeditions.com/wp-content/uploads/2025/02/v-01-02.jpg" alt="Tanzania Safari" loading="lazy">
+      <img src={data.mainImage} alt="Tanzania Safari" loading="lazy">
     </div>
   </div>
 </section>
